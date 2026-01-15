@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { Activity, Calendar, Trophy, Zap, ArrowRight, CheckCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default async function Home() {
   const supabase = await createClient()
@@ -8,7 +10,6 @@ export default async function Home() {
 
   // If logged in, redirect to dashboard
   if (user) {
-    // Check if system admin
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
@@ -23,91 +24,158 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <nav className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-gray-900">utogsykle</div>
-          <div className="space-x-4">
-            <a
-              href="mailto:kontakt@utogsykle.no"
-              className="text-gray-600 hover:text-gray-900 font-medium"
-            >
-              Kontakt oss
-            </a>
-            <Link
-              href="/login"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700"
-            >
-              Logg inn
-            </Link>
-          </div>
-        </nav>
+      <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex justify-between items-center h-16">
+            <div className="flex items-center gap-2">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl gradient-primary">
+                <Activity className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-xl font-bold">utogsykle</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <a
+                href="mailto:kontakt@utogsykle.no"
+                className="text-muted-foreground hover:text-foreground font-medium text-sm hidden sm:block"
+              >
+                Kontakt oss
+              </a>
+              <Button asChild>
+                <Link href="/login">
+                  Logg inn
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </nav>
+        </div>
       </header>
 
       {/* Hero */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-            Bedriftskonkurranser som faktisk fungerer
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
-            utogsykle er en helårs aktivitetsplattform for bedrifter.
-            Rettferdige konkurranser der konsistens teller mer enn prestasjon.
-          </p>
-          <div className="space-x-4">
-            <a
-              href="mailto:kontakt@utogsykle.no"
-              className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 text-lg inline-block"
-            >
-              Kontakt oss for demo
-            </a>
+      <main className="pt-16">
+        <section className="relative overflow-hidden">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10" />
+          <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-chart-5/20 rounded-full blur-3xl" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
+                <Zap className="h-4 w-4" />
+                Helårs aktivitetsplattform
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                Bedriftskonkurranser som
+                <span className="block text-gradient">faktisk fungerer</span>
+              </h1>
+
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+                utogsykle er plattformen der konsistens slår prestasjon.
+                Rettferdige konkurranser som engasjerer hele bedriften – hele året.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="text-lg px-8" asChild>
+                  <a href="mailto:kontakt@utogsykle.no">
+                    Bestill demo
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" className="text-lg px-8" asChild>
+                  <Link href="/login">
+                    Logg inn
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* Features */}
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+        <section className="py-24 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold mb-4">Hvorfor velge utogsykle?</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Vi har bygget plattformen vi selv ville hatt – med fokus på det som faktisk fungerer.
+              </p>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">52 uker i året</h3>
-            <p className="text-gray-600">
-              Ikke bare en kort kampanje. Engasjement hele året med sesonger, konkurranser og utfordringer.
-            </p>
-          </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Rettferdig for alle</h3>
-            <p className="text-gray-600">
-              Konsistens slår prestasjon. Den som møter opp hver dag vinner over maratonløperen som bare logger én gang.
-            </p>
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-card p-8 rounded-2xl border shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-14 h-14 gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary/25">
+                  <Calendar className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">52 uker i året</h3>
+                <p className="text-muted-foreground">
+                  Ikke bare en kort kampanje. Engasjement hele året med sesonger, konkurranser og utfordringer.
+                </p>
+              </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-              </svg>
+              <div className="bg-card p-8 rounded-2xl border shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-14 h-14 gradient-success rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-500/25">
+                  <CheckCircle className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Rettferdig for alle</h3>
+                <p className="text-muted-foreground">
+                  Konsistens slår prestasjon. Den som møter opp hver dag vinner over maratonløperen som logger én gang.
+                </p>
+              </div>
+
+              <div className="bg-card p-8 rounded-2xl border shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-14 h-14 gradient-warning rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-yellow-500/25">
+                  <Trophy className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Full kontroll</h3>
+                <p className="text-muted-foreground">
+                  Lag egne konkurranser for bedriften. Fra steg-utfordringer til kreative utfordringer.
+                </p>
+              </div>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Full kontroll</h3>
-            <p className="text-gray-600">
-              Lag egne konkurranser for bedriften. Fra steg-utfordringer til hvem som spiser ribbe flest ganger før jul.
-            </p>
           </div>
-        </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-24">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="bg-card p-12 rounded-3xl border shadow-lg relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="relative">
+                <h2 className="text-3xl font-bold mb-4">Klar for å komme i gang?</h2>
+                <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
+                  Ta kontakt for en uforpliktende demo og se hvordan utogsykle kan engasjere din bedrift.
+                </p>
+                <Button size="lg" className="text-lg px-8" asChild>
+                  <a href="mailto:kontakt@utogsykle.no">
+                    Kontakt oss
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center text-gray-500">
-        <p>&copy; {new Date().getFullYear()} utogsykle. Laget med glede i Norge.</p>
+      <footer className="border-t py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary">
+                <Activity className="h-4 w-4 text-white" />
+              </div>
+              <span className="font-semibold">utogsykle</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} utogsykle. Laget med glede i Norge.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   )

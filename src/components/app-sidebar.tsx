@@ -125,14 +125,14 @@ export function AppSidebar({ user, variant = "user" }: AppSidebarProps) {
   return (
     <Sidebar>
       <SidebarHeader>
-        <div className="flex items-center gap-2 px-2 py-1">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-            U
+        <div className="flex items-center gap-3 px-2 py-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary shadow-lg shadow-primary/25">
+            <Activity className="h-5 w-5 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="font-semibold text-sm">utogsykle</span>
+            <span className="font-bold text-base tracking-tight">utogsykle</span>
             {user.companies?.name && (
-              <span className="text-xs text-muted-foreground truncate max-w-[140px]">
+              <span className="text-xs text-sidebar-foreground/60 truncate max-w-[140px]">
                 {user.companies.name}
               </span>
             )}
@@ -201,8 +201,8 @@ export function AppSidebar({ user, variant = "user" }: AppSidebarProps) {
                   size="lg"
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                  <Avatar className="h-8 w-8 ring-2 ring-sidebar-primary/20">
+                    <AvatarFallback className="gradient-primary text-white text-xs font-medium">
                       {initials}
                     </AvatarFallback>
                   </Avatar>
