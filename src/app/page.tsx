@@ -29,17 +29,17 @@ export default async function Home() {
         <nav className="flex justify-between items-center">
           <div className="text-2xl font-bold text-gray-900">utogsykle</div>
           <div className="space-x-4">
-            <Link
-              href="/login"
+            <a
+              href="mailto:kontakt@utogsykle.no"
               className="text-gray-600 hover:text-gray-900 font-medium"
             >
-              Logg inn
-            </Link>
+              Kontakt oss
+            </a>
             <Link
-              href="/register"
+              href="/login"
               className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700"
             >
-              Kom i gang
+              Logg inn
             </Link>
           </div>
         </nav>
@@ -56,12 +56,12 @@ export default async function Home() {
             Rettferdige konkurranser der konsistens teller mer enn prestasjon.
           </p>
           <div className="space-x-4">
-            <Link
-              href="/register"
-              className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 text-lg"
+            <a
+              href="mailto:kontakt@utogsykle.no"
+              className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 text-lg inline-block"
             >
-              Start gratis prøveperiode
-            </Link>
+              Kontakt oss for demo
+            </a>
           </div>
         </div>
 
