@@ -60,43 +60,43 @@ export default async function DashboardPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-foreground">
           Hei, {profile?.full_name || 'der'}!
         </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-muted-foreground">
           Her er din aktivitetsoversikt.
         </p>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-4 mb-8">
-        <div className="bg-white overflow-hidden shadow rounded-lg p-5">
-          <dt className="text-sm font-medium text-gray-500 truncate">Streak</dt>
-          <dd className="mt-1 text-3xl font-semibold text-gray-900">
+        <div className="bg-card overflow-hidden shadow rounded-lg p-5 border border-border">
+          <dt className="text-sm font-medium text-muted-foreground truncate">Streak</dt>
+          <dd className="mt-1 text-3xl font-semibold text-foreground">
             {streak?.current_streak || 0} dager
           </dd>
-          <dd className="text-xs text-gray-500">
+          <dd className="text-xs text-muted-foreground">
             Lengste: {streak?.longest_streak || 0} dager
           </dd>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg p-5">
-          <dt className="text-sm font-medium text-gray-500 truncate">Poeng denne måneden</dt>
-          <dd className="mt-1 text-3xl font-semibold text-gray-900">
+        <div className="bg-card overflow-hidden shadow rounded-lg p-5 border border-border">
+          <dt className="text-sm font-medium text-muted-foreground truncate">Poeng denne måneden</dt>
+          <dd className="mt-1 text-3xl font-semibold text-foreground">
             {Math.round(totalPointsThisMonth)}
           </dd>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg p-5">
-          <dt className="text-sm font-medium text-gray-500 truncate">Aktive konkurranser</dt>
-          <dd className="mt-1 text-3xl font-semibold text-gray-900">
+        <div className="bg-card overflow-hidden shadow rounded-lg p-5 border border-border">
+          <dt className="text-sm font-medium text-muted-foreground truncate">Aktive konkurranser</dt>
+          <dd className="mt-1 text-3xl font-semibold text-foreground">
             {activeCompetitions.length}
           </dd>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg p-5">
-          <dt className="text-sm font-medium text-gray-500 truncate">Kudos mottatt</dt>
-          <dd className="mt-1 text-3xl font-semibold text-gray-900">
+        <div className="bg-card overflow-hidden shadow rounded-lg p-5 border border-border">
+          <dt className="text-sm font-medium text-muted-foreground truncate">Kudos mottatt</dt>
+          <dd className="mt-1 text-3xl font-semibold text-foreground">
             {kudosReceived || 0}
           </dd>
         </div>
@@ -104,31 +104,31 @@ export default async function DashboardPage() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Recent activities */}
-        <div className="bg-white shadow rounded-lg">
-          <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-            <h2 className="text-lg font-medium text-gray-900">Siste aktiviteter</h2>
-            <Link href="/dashboard/activities" className="text-sm text-blue-600 hover:text-blue-500">
+        <div className="bg-card shadow rounded-lg border border-border">
+          <div className="px-6 py-4 border-b border-border flex justify-between items-center">
+            <h2 className="text-lg font-medium text-foreground">Siste aktiviteter</h2>
+            <Link href="/dashboard/activities" className="text-sm text-primary hover:text-primary/80">
               Se alle
             </Link>
           </div>
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-border">
             {recentActivities && recentActivities.length > 0 ? (
               recentActivities.map((activity) => (
                 <div key={activity.id} className="px-6 py-4">
                   <div className="flex justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-sm font-medium text-foreground">
                         {activity.activity_types?.name}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-muted-foreground">
                         {activity.value} {activity.activity_types?.unit}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-medium text-green-600">
+                      <p className="text-sm font-medium text-green-400">
                         +{Math.round(activity.points || 0)} poeng
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         {new Date(activity.activity_date).toLocaleDateString('nb-NO')}
                       </p>
                     </div>
@@ -136,11 +136,11 @@ export default async function DashboardPage() {
                 </div>
               ))
             ) : (
-              <div className="px-6 py-8 text-center text-gray-500">
+              <div className="px-6 py-8 text-center text-muted-foreground">
                 <p>Ingen aktiviteter registrert ennå.</p>
                 <Link
                   href="/dashboard/activities"
-                  className="mt-2 inline-block text-sm text-blue-600 hover:text-blue-500"
+                  className="mt-2 inline-block text-sm text-primary hover:text-primary/80"
                 >
                   Registrer din første aktivitet
                 </Link>
@@ -150,33 +150,33 @@ export default async function DashboardPage() {
         </div>
 
         {/* Active competitions */}
-        <div className="bg-white shadow rounded-lg">
-          <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-            <h2 className="text-lg font-medium text-gray-900">Mine konkurranser</h2>
-            <Link href="/dashboard/competitions" className="text-sm text-blue-600 hover:text-blue-500">
+        <div className="bg-card shadow rounded-lg border border-border">
+          <div className="px-6 py-4 border-b border-border flex justify-between items-center">
+            <h2 className="text-lg font-medium text-foreground">Mine konkurranser</h2>
+            <Link href="/dashboard/competitions" className="text-sm text-primary hover:text-primary/80">
               Se alle
             </Link>
           </div>
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-border">
             {activeCompetitions.length > 0 ? (
               activeCompetitions.map((cp) => (
                 <Link
                   key={cp.id}
                   href={`/dashboard/competitions/${cp.competitions?.id}`}
-                  className="block px-6 py-4 hover:bg-gray-50"
+                  className="block px-6 py-4 hover:bg-muted/50"
                 >
                   <div className="flex justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-sm font-medium text-foreground">
                         {cp.competitions?.name}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-muted-foreground">
                         {cp.competitions?.type === 'individual' ? 'Individuell' :
                          cp.competitions?.type === 'team' ? 'Lag' : 'Avdeling'}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         Slutter {new Date(cp.competitions?.end_date || '').toLocaleDateString('nb-NO')}
                       </p>
                     </div>
@@ -184,11 +184,11 @@ export default async function DashboardPage() {
                 </Link>
               ))
             ) : (
-              <div className="px-6 py-8 text-center text-gray-500">
+              <div className="px-6 py-8 text-center text-muted-foreground">
                 <p>Du deltar ikke i noen konkurranser.</p>
                 <Link
                   href="/dashboard/competitions"
-                  className="mt-2 inline-block text-sm text-blue-600 hover:text-blue-500"
+                  className="mt-2 inline-block text-sm text-primary hover:text-primary/80"
                 >
                   Finn en konkurranse
                 </Link>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import JoinLeaveButton from './JoinLeaveButton'
+import { Button } from '@/components/ui/button'
 
 export default async function CompetitionsPage() {
   const supabase = await createClient()
@@ -39,8 +40,8 @@ export default async function CompetitionsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Konkurranser</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-foreground">Konkurranser</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Finn og bli med i konkurranser i din bedrift.
         </p>
       </div>
@@ -54,14 +55,14 @@ export default async function CompetitionsPage() {
             const daysLeft = Math.ceil((new Date(competition.end_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
 
             return (
-              <div key={competition.id} className="bg-white shadow rounded-lg overflow-hidden">
+              <div key={competition.id} className="bg-card shadow rounded-lg overflow-hidden border border-border">
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900">
+                      <h3 className="text-lg font-medium text-foreground">
                         {competition.name}
                       </h3>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-muted-foreground">
                         {competition.type === 'individual' ? 'Individuell' :
                          competition.type === 'team' ? 'Lag' : 'Avdeling'}
                         {competition.activity_types && ` • ${competition.activity_types.name}`}
@@ -69,20 +70,20 @@ export default async function CompetitionsPage() {
                     </div>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                       competition.status === 'active'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-yellow-100 text-yellow-800'
+                        ? 'bg-green-500/20 text-green-400'
+                        : 'bg-yellow-500/20 text-yellow-400'
                     }`}>
                       {competition.status === 'active' ? 'Aktiv' : 'Kommer'}
                     </span>
                   </div>
 
                   {competition.description && (
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                       {competition.description}
                     </p>
                   )}
 
-                  <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+                  <div className="flex justify-between items-center text-sm text-muted-foreground mb-4">
                     <span>{participantCount} deltakere</span>
                     <span>
                       {daysLeft > 0 ? `${daysLeft} dager igjen` : 'Avsluttet'}
@@ -90,12 +91,11 @@ export default async function CompetitionsPage() {
                   </div>
 
                   <div className="flex space-x-3">
-                    <Link
-                      href={`/dashboard/competitions/${competition.id}`}
-                      className="flex-1 text-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                    >
-                      Se detaljer
-                    </Link>
+                    <Button variant="outline" asChild className="flex-1">
+                      <Link href={`/dashboard/competitions/${competition.id}`}>
+                        Se detaljer
+                      </Link>
+                    </Button>
                     <JoinLeaveButton
                       competitionId={competition.id}
                       isParticipating={isParticipating}
@@ -107,7 +107,7 @@ export default async function CompetitionsPage() {
             )
           })
         ) : (
-          <div className="col-span-full bg-white shadow rounded-lg p-8 text-center text-gray-500">
+          <div className="col-span-full bg-card shadow rounded-lg p-8 text-center text-muted-foreground border border-border">
             <p>Ingen aktive konkurranser for øyeblikket.</p>
             <p className="text-sm mt-2">Be din administrator om å opprette en konkurranse.</p>
           </div>

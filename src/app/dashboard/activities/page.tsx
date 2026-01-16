@@ -38,38 +38,38 @@ export default async function ActivitiesPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Mine aktiviteter</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-foreground">Mine aktiviteter</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Registrer nye aktiviteter og se din historikk.
         </p>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 mb-8">
-        <div className="bg-white overflow-hidden shadow rounded-lg p-5">
-          <dt className="text-sm font-medium text-gray-500 truncate">Totalt antall</dt>
-          <dd className="mt-1 text-2xl font-semibold text-gray-900">{totalActivities}</dd>
+        <div className="bg-card overflow-hidden shadow rounded-lg p-5 border border-border">
+          <dt className="text-sm font-medium text-muted-foreground truncate">Totalt antall</dt>
+          <dd className="mt-1 text-2xl font-semibold text-foreground">{totalActivities}</dd>
         </div>
-        <div className="bg-white overflow-hidden shadow rounded-lg p-5">
-          <dt className="text-sm font-medium text-gray-500 truncate">Totale poeng</dt>
-          <dd className="mt-1 text-2xl font-semibold text-gray-900">{Math.round(totalPoints)}</dd>
+        <div className="bg-card overflow-hidden shadow rounded-lg p-5 border border-border">
+          <dt className="text-sm font-medium text-muted-foreground truncate">Totale poeng</dt>
+          <dd className="mt-1 text-2xl font-semibold text-foreground">{Math.round(totalPoints)}</dd>
         </div>
-        <div className="bg-white overflow-hidden shadow rounded-lg p-5">
-          <dt className="text-sm font-medium text-gray-500 truncate">Denne måneden</dt>
-          <dd className="mt-1 text-2xl font-semibold text-gray-900">{Math.round(thisMonthPoints)} poeng</dd>
+        <div className="bg-card overflow-hidden shadow rounded-lg p-5 border border-border">
+          <dt className="text-sm font-medium text-muted-foreground truncate">Denne måneden</dt>
+          <dd className="mt-1 text-2xl font-semibold text-foreground">{Math.round(thisMonthPoints)} poeng</dd>
         </div>
       </div>
 
       {/* Log activity form */}
-      <div className="bg-white shadow rounded-lg p-6 mb-8">
-        <h2 className="text-lg font-medium text-gray-900 mb-4">Registrer aktivitet</h2>
+      <div className="bg-card shadow rounded-lg p-6 mb-8 border border-border">
+        <h2 className="text-lg font-medium text-foreground mb-4">Registrer aktivitet</h2>
         <LogActivityForm activityTypes={activityTypes || []} />
       </div>
 
       {/* Activities list */}
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">Aktivitetshistorikk</h2>
+      <div className="bg-card shadow rounded-lg border border-border">
+        <div className="px-6 py-4 border-b border-border">
+          <h2 className="text-lg font-medium text-foreground">Aktivitetshistorikk</h2>
         </div>
         <ActivitiesList activities={activities || []} />
       </div>

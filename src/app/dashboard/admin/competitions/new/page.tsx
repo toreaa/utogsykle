@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createCompetition } from '../actions'
 import { createClient } from '@/lib/supabase/client'
+import { Button } from '@/components/ui/button'
 
 export default function NewCompetitionPage() {
   const [error, setError] = useState<string | null>(null)
@@ -48,23 +49,23 @@ export default function NewCompetitionPage() {
       <div className="mb-8">
         <Link
           href="/dashboard/admin/competitions"
-          className="text-sm text-blue-600 hover:text-blue-500"
+          className="text-sm text-primary hover:text-primary/80"
         >
           &larr; Tilbake til konkurranser
         </Link>
-        <h1 className="mt-2 text-2xl font-bold text-gray-900">Opprett ny konkurranse</h1>
+        <h1 className="mt-2 text-2xl font-bold text-foreground">Opprett ny konkurranse</h1>
       </div>
 
-      <div className="bg-white shadow sm:rounded-lg">
+      <div className="bg-card shadow sm:rounded-lg border border-border">
         <form action={handleSubmit} className="p-6 space-y-6">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg">
               {error}
             </div>
           )}
 
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-sm font-medium text-foreground">
               Navn på konkurransen *
             </label>
             <input
@@ -72,33 +73,33 @@ export default function NewCompetitionPage() {
               name="name"
               id="name"
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
               placeholder="Ukentlig steg-utfordring"
             />
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="description" className="block text-sm font-medium text-foreground">
               Beskrivelse
             </label>
             <textarea
               name="description"
               id="description"
               rows={3}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
               placeholder="Beskriv konkurransens regler og mål..."
             />
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <label htmlFor="type" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="type" className="block text-sm font-medium text-foreground">
                 Type
               </label>
               <select
                 name="type"
                 id="type"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
               >
                 <option value="individual">Individuell</option>
                 <option value="team">Lag</option>
@@ -107,13 +108,13 @@ export default function NewCompetitionPage() {
             </div>
 
             <div>
-              <label htmlFor="activityTypeId" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="activityTypeId" className="block text-sm font-medium text-foreground">
                 Aktivitetstype
               </label>
               <select
                 name="activityTypeId"
                 id="activityTypeId"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
               >
                 <option value="">Alle aktiviteter</option>
                 {activityTypes.map((type) => (
@@ -127,7 +128,7 @@ export default function NewCompetitionPage() {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="startDate" className="block text-sm font-medium text-foreground">
                 Startdato *
               </label>
               <input
@@ -136,12 +137,12 @@ export default function NewCompetitionPage() {
                 id="startDate"
                 required
                 defaultValue={today}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
               />
             </div>
 
             <div>
-              <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="endDate" className="block text-sm font-medium text-foreground">
                 Sluttdato *
               </label>
               <input
@@ -150,25 +151,24 @@ export default function NewCompetitionPage() {
                 id="endDate"
                 required
                 defaultValue={defaultEndDate}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
               />
             </div>
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-            <Link
-              href="/dashboard/admin/competitions"
-              className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-            >
-              Avbryt
-            </Link>
-            <button
+          <div className="flex justify-end space-x-3 pt-4 border-t border-border">
+            <Button variant="outline" asChild>
+              <Link href="/dashboard/admin/competitions">
+                Avbryt
+              </Link>
+            </Button>
+            <Button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+              className="glow-primary"
             >
               {loading ? 'Oppretter...' : 'Opprett konkurranse'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

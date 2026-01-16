@@ -1,11 +1,12 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { headers } from 'next/headers'
 
 export async function inviteUser(formData: FormData) {
   const supabase = await createClient()
+  const adminSupabase = createAdminClient()
 
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -44,8 +45,8 @@ export async function inviteUser(formData: FormData) {
   const protocol = host.includes('localhost') ? 'http' : 'https'
   const siteUrl = `${protocol}://${host}`
 
-  // Send magic link invitation via Supabase Auth
-  const { error: authError } = await supabase.auth.admin.inviteUserByEmail(email, {
+  // Send magic link invitation via Supabase Auth (requires service role)
+  const { error: authError } = await adminSupabase.auth.admin.inviteUserByEmail(email, {
     redirectTo: `${siteUrl}/auth/callback?invitation=${invitation.token}`,
     data: {
       invitation_token: invitation.token,

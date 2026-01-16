@@ -32,30 +32,30 @@ export default function ActivitiesList({ activities }: Props) {
 
   if (activities.length === 0) {
     return (
-      <div className="px-6 py-8 text-center text-gray-500">
+      <div className="px-6 py-8 text-center text-muted-foreground">
         Ingen aktiviteter registrert ennå. Bruk skjemaet over for å registrere din første aktivitet!
       </div>
     )
   }
 
   return (
-    <div className="divide-y divide-gray-200">
+    <div className="divide-y divide-border">
       {activities.map((activity) => (
         <div key={activity.id} className="px-6 py-4">
           <div className="flex justify-between items-start">
             <div className="flex-1">
               <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-medium text-foreground">
                   {activity.activity_types?.name || 'Ukjent'}
                 </span>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-muted-foreground">
                   {activity.value} {activity.activity_types ? unitLabels[activity.activity_types.unit || 'minutes'] : ''}
                 </span>
               </div>
               {activity.notes && (
-                <p className="mt-1 text-sm text-gray-500">{activity.notes}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{activity.notes}</p>
               )}
-              <p className="mt-1 text-xs text-gray-400">
+              <p className="mt-1 text-xs text-muted-foreground/70">
                 {new Date(activity.activity_date).toLocaleDateString('nb-NO', {
                   weekday: 'long',
                   year: 'numeric',
@@ -66,13 +66,13 @@ export default function ActivitiesList({ activities }: Props) {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-sm font-medium text-green-600">
+              <span className="text-sm font-medium text-green-400">
                 +{Math.round(activity.points || 0)} poeng
               </span>
               <button
                 onClick={() => handleDelete(activity.id)}
                 disabled={deleting === activity.id}
-                className="text-sm text-red-600 hover:text-red-500 disabled:opacity-50"
+                className="text-sm text-destructive hover:text-destructive/80 disabled:opacity-50"
               >
                 {deleting === activity.id ? 'Sletter...' : 'Slett'}
               </button>

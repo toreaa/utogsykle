@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { joinCompetition, leaveCompetition } from './actions'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   competitionId: string
@@ -33,30 +34,28 @@ export default function JoinLeaveButton({ competitionId, isParticipating, isActi
 
   if (!isActive && !participating) {
     return (
-      <button
+      <Button
         disabled
-        className="flex-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-400 bg-gray-50 cursor-not-allowed"
+        variant="outline"
+        className="opacity-50 cursor-not-allowed"
       >
         Ikke startet
-      </button>
+      </Button>
     )
   }
 
   return (
-    <button
+    <Button
       onClick={handleClick}
       disabled={loading}
-      className={`flex-1 px-4 py-2 border rounded-md shadow-sm text-sm font-medium disabled:opacity-50 ${
-        participating
-          ? 'border-red-300 text-red-700 bg-red-50 hover:bg-red-100'
-          : 'border-transparent text-white bg-blue-600 hover:bg-blue-700'
-      }`}
+      variant={participating ? 'destructive' : 'default'}
+      className={!participating ? 'glow-primary' : ''}
     >
       {loading
         ? 'Laster...'
         : participating
         ? 'Meld av'
         : 'Bli med'}
-    </button>
+    </Button>
   )
 }

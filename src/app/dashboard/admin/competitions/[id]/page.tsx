@@ -61,12 +61,12 @@ export default async function CompetitionDetailPage({ params }: Props) {
       <div className="mb-8">
         <Link
           href="/dashboard/admin/competitions"
-          className="text-sm text-blue-600 hover:text-blue-500"
+          className="text-sm text-primary hover:text-primary/80"
         >
           &larr; Tilbake til konkurranser
         </Link>
-        <h1 className="mt-2 text-2xl font-bold text-gray-900">{competition.name}</h1>
-        <p className="text-sm text-gray-500">
+        <h1 className="mt-2 text-2xl font-bold text-foreground">{competition.name}</h1>
+        <p className="text-sm text-muted-foreground">
           {competition.type === 'individual' ? 'Individuell' :
            competition.type === 'team' ? 'Lag' : 'Avdeling'}
           {competition.activity_types && ` • ${competition.activity_types.name}`}
@@ -75,42 +75,42 @@ export default async function CompetitionDetailPage({ params }: Props) {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Edit form */}
-        <div className="bg-white shadow sm:rounded-lg">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-gray-900">Innstillinger</h2>
+        <div className="bg-card shadow sm:rounded-lg border border-border">
+          <div className="px-6 py-4 border-b border-border">
+            <h2 className="text-lg font-medium text-foreground">Innstillinger</h2>
           </div>
           <CompetitionEditForm competition={competition} />
         </div>
 
         {/* Leaderboard */}
-        <div className="bg-white shadow sm:rounded-lg">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-gray-900">Ledertavle</h2>
+        <div className="bg-card shadow sm:rounded-lg border border-border">
+          <div className="px-6 py-4 border-b border-border">
+            <h2 className="text-lg font-medium text-foreground">Ledertavle</h2>
           </div>
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-border">
             {sortedLeaderboard.length > 0 ? (
               sortedLeaderboard.map((entry, index) => (
                 <div key={entry.userId} className="px-6 py-4 flex justify-between items-center">
                   <div className="flex items-center">
                     <span className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium ${
-                      index === 0 ? 'bg-yellow-100 text-yellow-800' :
-                      index === 1 ? 'bg-gray-100 text-gray-800' :
-                      index === 2 ? 'bg-orange-100 text-orange-800' :
-                      'bg-gray-50 text-gray-600'
+                      index === 0 ? 'bg-yellow-500/20 text-yellow-400' :
+                      index === 1 ? 'bg-muted text-muted-foreground' :
+                      index === 2 ? 'bg-orange-500/20 text-orange-400' :
+                      'bg-muted/50 text-muted-foreground'
                     }`}>
                       {index + 1}
                     </span>
-                    <span className="ml-3 text-sm font-medium text-gray-900">
+                    <span className="ml-3 text-sm font-medium text-foreground">
                       {entry.name}
                     </span>
                   </div>
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm font-medium text-foreground">
                     {Math.round(entry.points)} poeng
                   </span>
                 </div>
               ))
             ) : (
-              <div className="px-6 py-8 text-center text-gray-500">
+              <div className="px-6 py-8 text-center text-muted-foreground">
                 Ingen aktiviteter registrert i denne perioden.
               </div>
             )}
@@ -119,26 +119,26 @@ export default async function CompetitionDetailPage({ params }: Props) {
       </div>
 
       {/* Participants */}
-      <div className="mt-6 bg-white shadow sm:rounded-lg">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">
+      <div className="mt-6 bg-card shadow sm:rounded-lg border border-border">
+        <div className="px-6 py-4 border-b border-border">
+          <h2 className="text-lg font-medium text-foreground">
             Deltakere ({participants?.length || 0})
           </h2>
         </div>
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-border">
           {participants && participants.length > 0 ? (
             participants.map((participant) => (
               <div key={participant.id} className="px-6 py-4 flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-medium text-foreground">
                   {(participant.profiles as unknown as { full_name: string })?.full_name || 'Ukjent'}
                 </span>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-muted-foreground">
                   Ble med {participant.joined_at ? new Date(participant.joined_at).toLocaleDateString('nb-NO') : '-'}
                 </span>
               </div>
             ))
           ) : (
-            <div className="px-6 py-8 text-center text-gray-500">
+            <div className="px-6 py-8 text-center text-muted-foreground">
               Ingen deltakere ennå.
             </div>
           )}

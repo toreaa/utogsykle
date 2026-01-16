@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { signIn } from '../actions/auth'
+import { Activity } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null)
@@ -20,18 +22,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h1 className="text-center text-3xl font-bold text-gray-900">
+          <div className="flex justify-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-primary glow-primary">
+              <Activity className="h-6 w-6 text-primary-foreground" />
+            </div>
+          </div>
+          <h1 className="mt-4 text-center text-3xl font-bold text-foreground">
             utogsykle
           </h1>
-          <h2 className="mt-6 text-center text-2xl font-semibold text-gray-900">
+          <h2 className="mt-6 text-center text-2xl font-semibold text-foreground">
             Logg inn på kontoen din
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-muted-foreground">
             Eller{' '}
-            <Link href="/register" className="font-medium text-blue-600 hover:text-blue-500">
+            <Link href="/register" className="font-medium text-primary hover:text-primary/80">
               registrer deg her
             </Link>
           </p>
@@ -39,14 +46,14 @@ export default function LoginPage() {
 
         <form className="mt-8 space-y-6" action={handleSubmit}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg">
               {error}
             </div>
           )}
 
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground">
                 E-post
               </label>
               <input
@@ -55,13 +62,13 @@ export default function LoginPage() {
                 type="email"
                 autoComplete="email"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 bg-card border border-input rounded-lg shadow-sm placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
                 placeholder="din@epost.no"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-foreground">
                 Passord
               </label>
               <input
@@ -70,19 +77,20 @@ export default function LoginPage() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 bg-card border border-input rounded-lg shadow-sm placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
                 placeholder="••••••••"
               />
             </div>
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full glow-primary"
+            size="lg"
           >
             {loading ? 'Logger inn...' : 'Logg inn'}
-          </button>
+          </Button>
         </form>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import { Button } from '@/components/ui/button'
 
 export default async function CompanyAdminDashboardPage() {
   const supabase = await createClient()
@@ -65,90 +66,90 @@ export default async function CompanyAdminDashboardPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Bedriftsadministrasjon</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-foreground">Bedriftsadministrasjon</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Administrer {profile?.companies?.name}
         </p>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="bg-card overflow-hidden shadow rounded-lg border border-border">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">Brukere</dt>
-                  <dd className="text-lg font-semibold text-gray-900">{usersCount || 0}</dd>
+                  <dt className="text-sm font-medium text-muted-foreground truncate">Brukere</dt>
+                  <dd className="text-lg font-semibold text-foreground">{usersCount || 0}</dd>
                 </dl>
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 px-5 py-3">
-            <Link href="/dashboard/admin/users" className="text-sm font-medium text-blue-600 hover:text-blue-500">
+          <div className="bg-muted px-5 py-3">
+            <Link href="/dashboard/admin/users" className="text-sm font-medium text-primary hover:text-primary/80">
               Administrer brukere
             </Link>
           </div>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="bg-card overflow-hidden shadow rounded-lg border border-border">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">Aktive konkurranser</dt>
-                  <dd className="text-lg font-semibold text-gray-900">{activeCompetitionsCount || 0}</dd>
+                  <dt className="text-sm font-medium text-muted-foreground truncate">Aktive konkurranser</dt>
+                  <dd className="text-lg font-semibold text-foreground">{activeCompetitionsCount || 0}</dd>
                 </dl>
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 px-5 py-3">
-            <Link href="/dashboard/admin/competitions" className="text-sm font-medium text-blue-600 hover:text-blue-500">
+          <div className="bg-muted px-5 py-3">
+            <Link href="/dashboard/admin/competitions" className="text-sm font-medium text-primary hover:text-primary/80">
               Administrer konkurranser
             </Link>
           </div>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="bg-card overflow-hidden shadow rounded-lg border border-border">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">Aktiviteter denne uken</dt>
-                  <dd className="text-lg font-semibold text-gray-900">{activitiesThisWeek || 0}</dd>
+                  <dt className="text-sm font-medium text-muted-foreground truncate">Aktiviteter denne uken</dt>
+                  <dd className="text-lg font-semibold text-foreground">{activitiesThisWeek || 0}</dd>
                 </dl>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="bg-card overflow-hidden shadow rounded-lg border border-border">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">Deltakelse</dt>
-                  <dd className="text-lg font-semibold text-gray-900">{participationRate}%</dd>
+                  <dt className="text-sm font-medium text-muted-foreground truncate">Deltakelse</dt>
+                  <dd className="text-lg font-semibold text-foreground">{participationRate}%</dd>
                 </dl>
               </div>
             </div>
@@ -157,27 +158,25 @@ export default async function CompanyAdminDashboardPage() {
       </div>
 
       {/* Quick actions */}
-      <div className="bg-white shadow rounded-lg p-6 mb-8">
-        <h2 className="text-lg font-medium text-gray-900 mb-4">Hurtighandlinger</h2>
+      <div className="bg-card shadow rounded-lg p-6 mb-8 border border-border">
+        <h2 className="text-lg font-medium text-foreground mb-4">Hurtighandlinger</h2>
         <div className="flex flex-wrap gap-4">
-          <Link
-            href="/dashboard/admin/users?invite=true"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
-          >
-            Inviter brukere
-          </Link>
-          <Link
-            href="/dashboard/admin/competitions/new"
-            className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50"
-          >
-            Opprett konkurranse
-          </Link>
+          <Button asChild className="glow-primary">
+            <Link href="/dashboard/admin/users?invite=true">
+              Inviter brukere
+            </Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/dashboard/admin/competitions/new">
+              Opprett konkurranse
+            </Link>
+          </Button>
         </div>
       </div>
 
       {/* Pending invitations */}
       {(pendingInvitations || 0) > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
           <div className="flex">
             <div className="flex-shrink-0">
               <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
@@ -185,10 +184,10 @@ export default async function CompanyAdminDashboardPage() {
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-yellow-800">
+              <h3 className="text-sm font-medium text-yellow-400">
                 {pendingInvitations} ventende invitasjoner
               </h3>
-              <p className="mt-1 text-sm text-yellow-700">
+              <p className="mt-1 text-sm text-yellow-400/80">
                 Det er invitasjoner som venter på å bli akseptert.
               </p>
             </div>

@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { logActivity } from './actions'
 import { Database } from '@/lib/supabase/database.types'
+import { Button } from '@/components/ui/button'
 
 type ActivityType = Database['public']['Tables']['activity_types']['Row']
 
@@ -55,13 +56,13 @@ export default function LogActivityForm({ activityTypes }: Props) {
   return (
     <form ref={formRef} action={handleSubmit} className="space-y-4">
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+        <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg">
           {error}
         </div>
       )}
 
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+        <div className="bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-lg">
           Aktivitet registrert!
           {selectedType && ` +${Math.round((selectedType.points_per_unit || 1) * parseFloat((document.getElementById('value') as HTMLInputElement)?.value || '0'))} poeng`}
         </div>
@@ -69,7 +70,7 @@ export default function LogActivityForm({ activityTypes }: Props) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
         <div>
-          <label htmlFor="activityTypeId" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="activityTypeId" className="block text-sm font-medium text-foreground">
             Aktivitetstype
           </label>
           <select
@@ -77,7 +78,7 @@ export default function LogActivityForm({ activityTypes }: Props) {
             id="activityTypeId"
             required
             onChange={handleTypeChange}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
           >
             {activityTypes.map((type) => (
               <option key={type.id} value={type.id}>
@@ -88,7 +89,7 @@ export default function LogActivityForm({ activityTypes }: Props) {
         </div>
 
         <div>
-          <label htmlFor="value" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="value" className="block text-sm font-medium text-foreground">
             Mengde ({selectedType ? unitLabels[selectedType.unit || 'minutes'] : ''})
           </label>
           <input
@@ -98,18 +99,18 @@ export default function LogActivityForm({ activityTypes }: Props) {
             required
             min="0"
             step="0.1"
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
             placeholder={selectedType?.unit === 'steps' ? '5000' : selectedType?.unit === 'km' ? '5' : '30'}
           />
           {selectedType && (
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {selectedType.points_per_unit} poeng per {unitLabels[selectedType.unit || 'minutes'].slice(0, -1) || 'enhet'}
             </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="activityDate" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="activityDate" className="block text-sm font-medium text-foreground">
             Dato
           </label>
           <input
@@ -119,30 +120,30 @@ export default function LogActivityForm({ activityTypes }: Props) {
             required
             defaultValue={today}
             max={today}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
           />
         </div>
 
         <div className="flex items-end">
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="w-full px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+            className="w-full glow-primary"
           >
             {loading ? 'Registrerer...' : 'Registrer'}
-          </button>
+          </Button>
         </div>
       </div>
 
       <div>
-        <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="notes" className="block text-sm font-medium text-foreground">
           Notater (valgfritt)
         </label>
         <input
           type="text"
           name="notes"
           id="notes"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
           placeholder="F.eks. Morgentur rundt vannet"
         />
       </div>

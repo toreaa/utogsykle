@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { inviteUser } from './actions'
+import { Button } from '@/components/ui/button'
 
 export default function InviteUserForm() {
   const [error, setError] = useState<string | null>(null)
@@ -29,20 +30,20 @@ export default function InviteUserForm() {
   return (
     <form ref={formRef} action={handleSubmit} className="space-y-4">
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+        <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg">
           {error}
         </div>
       )}
 
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+        <div className="bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-lg">
           Invitasjon sendt!
         </div>
       )}
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="flex-1">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="email" className="block text-sm font-medium text-foreground">
             E-postadresse
           </label>
           <input
@@ -50,19 +51,19 @@ export default function InviteUserForm() {
             name="email"
             id="email"
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
             placeholder="kollega@bedrift.no"
           />
         </div>
 
         <div className="sm:w-48">
-          <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="role" className="block text-sm font-medium text-foreground">
             Rolle
           </label>
           <select
             name="role"
             id="role"
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 block w-full bg-card border border-input rounded-lg shadow-sm py-2 px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent sm:text-sm"
           >
             <option value="user">Bruker</option>
             <option value="company_admin">Administrator</option>
@@ -70,13 +71,13 @@ export default function InviteUserForm() {
         </div>
 
         <div className="flex items-end">
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+            className="w-full sm:w-auto glow-primary"
           >
             {loading ? 'Sender...' : 'Send invitasjon'}
-          </button>
+          </Button>
         </div>
       </div>
     </form>

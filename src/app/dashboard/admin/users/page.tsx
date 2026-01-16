@@ -35,32 +35,32 @@ export default async function UsersPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Brukere</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-foreground">Brukere</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Administrer brukere og invitasjoner for bedriften.
         </p>
       </div>
 
       {/* Invite form */}
-      <div className="bg-white shadow rounded-lg p-6 mb-8">
-        <h2 className="text-lg font-medium text-gray-900 mb-4">Inviter ny bruker</h2>
+      <div className="bg-card shadow rounded-lg p-6 mb-8 border border-border">
+        <h2 className="text-lg font-medium text-foreground mb-4">Inviter ny bruker</h2>
         <InviteUserForm />
       </div>
 
       {/* Pending invitations */}
       {invitations && invitations.length > 0 && (
-        <div className="bg-white shadow rounded-lg mb-8">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-gray-900">
+        <div className="bg-card shadow rounded-lg mb-8 border border-border">
+          <div className="px-6 py-4 border-b border-border">
+            <h2 className="text-lg font-medium text-foreground">
               Ventende invitasjoner ({invitations.length})
             </h2>
           </div>
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-border">
             {invitations.map((invitation) => (
               <div key={invitation.id} className="px-6 py-4 flex justify-between items-center">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{invitation.email}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm font-medium text-foreground">{invitation.email}</p>
+                  <p className="text-sm text-muted-foreground">
                     {invitation.role === 'company_admin' ? 'Administrator' : 'Bruker'}
                     {' • '}
                     Utløper {new Date(invitation.expires_at!).toLocaleDateString('nb-NO')}
@@ -73,7 +73,7 @@ export default async function UsersPage() {
                 }}>
                   <button
                     type="submit"
-                    className="text-sm text-red-600 hover:text-red-500"
+                    className="text-sm text-destructive hover:text-destructive/80"
                   >
                     Slett
                   </button>
@@ -85,9 +85,9 @@ export default async function UsersPage() {
       )}
 
       {/* Users list */}
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">
+      <div className="bg-card shadow rounded-lg border border-border">
+        <div className="px-6 py-4 border-b border-border">
+          <h2 className="text-lg font-medium text-foreground">
             Brukere ({users?.length || 0})
           </h2>
         </div>

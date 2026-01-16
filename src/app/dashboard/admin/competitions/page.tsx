@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import { Button } from '@/components/ui/button'
 
 export default async function CompetitionsAdminPage() {
   const supabase = await createClient()
@@ -30,39 +31,38 @@ export default async function CompetitionsAdminPage() {
     <div>
       <div className="sm:flex sm:items-center sm:justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Konkurranser</h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <h1 className="text-2xl font-bold text-foreground">Konkurranser</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
             Opprett og administrer konkurranser for bedriften.
           </p>
         </div>
         <div className="mt-4 sm:mt-0">
-          <Link
-            href="/dashboard/admin/competitions/new"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
-          >
-            Opprett konkurranse
-          </Link>
+          <Button asChild className="glow-primary">
+            <Link href="/dashboard/admin/competitions/new">
+              Opprett konkurranse
+            </Link>
+          </Button>
         </div>
       </div>
 
       {/* Competitions list */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="bg-card shadow overflow-hidden sm:rounded-lg border border-border">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-muted">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Konkurranse
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Type
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Deltakere
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Periode
               </th>
               <th className="relative px-6 py-3">
@@ -70,50 +70,50 @@ export default async function CompetitionsAdminPage() {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-card divide-y divide-border">
             {competitions && competitions.length > 0 ? (
               competitions.map((competition) => (
                 <tr key={competition.id}>
                   <td className="px-6 py-4">
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-sm font-medium text-foreground">
                       {competition.name}
                     </div>
                     {competition.activity_types && (
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-muted-foreground">
                         {competition.activity_types.name}
                       </div>
                     )}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                     {competition.type === 'individual' ? 'Individuell' :
                      competition.type === 'team' ? 'Lag' : 'Avdeling'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                     {(competition.competition_participants as unknown as { count: number }[])?.[0]?.count || 0}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                       competition.status === 'active'
-                        ? 'bg-green-100 text-green-800'
+                        ? 'bg-green-500/20 text-green-400'
                         : competition.status === 'completed'
-                        ? 'bg-gray-100 text-gray-800'
+                        ? 'bg-muted text-muted-foreground'
                         : competition.status === 'draft'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-red-100 text-red-800'
+                        ? 'bg-yellow-500/20 text-yellow-400'
+                        : 'bg-red-500/20 text-red-400'
                     }`}>
                       {competition.status === 'active' ? 'Aktiv' :
                        competition.status === 'completed' ? 'Fullført' :
                        competition.status === 'draft' ? 'Utkast' : 'Avlyst'}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                     {new Date(competition.start_date).toLocaleDateString('nb-NO')} -{' '}
                     {new Date(competition.end_date).toLocaleDateString('nb-NO')}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link
                       href={`/dashboard/admin/competitions/${competition.id}`}
-                      className="text-blue-600 hover:text-blue-900"
+                      className="text-primary hover:text-primary/80"
                     >
                       Rediger
                     </Link>
@@ -122,7 +122,7 @@ export default async function CompetitionsAdminPage() {
               ))
             ) : (
               <tr>
-                <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
+                <td colSpan={6} className="px-6 py-8 text-center text-muted-foreground">
                   Ingen konkurranser opprettet ennå.
                 </td>
               </tr>

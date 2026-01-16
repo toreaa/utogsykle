@@ -25,6 +25,11 @@ export default async function DashboardLayout({
     .eq('id', user.id)
     .single()
 
+  // System admins should use /admin instead
+  if (profile?.role === 'system_admin') {
+    redirect('/admin')
+  }
+
   if (!profile?.company_id) {
     // User has no company - show message
     return (
@@ -47,7 +52,7 @@ export default async function DashboardLayout({
     )
   }
 
-  const isAdmin = profile.role === 'company_admin' || profile.role === 'system_admin'
+  const isAdmin = profile.role === 'company_admin'
 
   return (
     <SidebarProvider>
